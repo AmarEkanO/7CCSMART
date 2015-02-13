@@ -1,0 +1,176 @@
+\documentclass{llncs}
+\usepackage{graphicx}
+
+
+\begin{document}
+
+\institute{King's College London\\
+	Department of Informatics,\\
+	School of Natural and Mathematical Sciences}
+\author{Amar Menezes (1435460)\\
+\texttt{amar.menezes@kcl.ac.uk}}
+\title{Achieving Internet Anonymity with Tor}
+\date{November 2014}
+\maketitle
+
+\begin{abstract} 
+	The objective of this review is to educate the reader on Internet privacy and anonymity. This review is intended for people interested in researching privacy enhancing technologies and/or designing such systems. We begin an overview of anonymity technologies and their design considerations. We follow it up with a detailed evaluation of the Tor network, attacks against it, how it defends itself against such attacks and how it compares with other existing low latency anonymity networks. We conclude with discussing some of the open issues with the Tor network in an effort to encourage the reader to take up some of the challenges. 
+\end{abstract}
+
+\section{Introduction}
+\begin{itemize}
+\item{Why is Internet anonymity such a big deal?}
+\item{Is there really a need for anonymity on the Internet?}
+\item{Real world anonymity v/s Internet anonymity. Is it the same?}
+\item{Who are the people most affected by a de-anonymized Internet}
+\item{Why is achieving Internet anonymity a challenge?}
+\item{What are the threats to anonymity on the Internet}
+\item{How is this review organized}
+\end{itemize}
+
+\section{Background}
+\subsection{Evolution of privacy enabling technologies}
+\begin{itemize}
+	\item{Anonymous email first introduced with Type 0 re-mailers 1997}
+	\item{cyberpunk era and Type 1 chain re-mailers}
+	\item{Security issues with Type1 led to creation of Mixmaster or Type 2 re-mailers}
+	\item{ Mixminion or Type 3 re-mailers as a solution to anonymous and pseudonymous email delivery}
+	\item{Ross Anderson's Eternity Service}
+	\item{DC-Net: first p2p approach to sender receiver anonymity}
+	\item{Inception of PipeNet and Onion Routing}
+\end{itemize}
+\subsection{Extant technologies in the 21st century}
+\begin{itemize}
+	\item{Crowds network by AT\&T}
+	\item{FreeHaven, FreeNet and Publius: Eternity Service inspired networks}
+	\item{Zero Knowledge Systems Freedom Network}
+	\item{Tor: Second generation onion routing}
+\end{itemize}
+\subsection{The rising popularity of Tor}
+\begin{itemize}
+	\item{Perfect forward secrecy}
+	\item{low latency anonymity network}
+	\item{approx 2000 relay nodes on the Internet: more than any other anonymizing network}
+	\item{Existing internet applications can be used without modification (HTTP, IRC, FTP, SSH, etc)}
+	\item{Availability of Hidden services}
+	\item{Resilient to censorship}
+\end{itemize}
+
+\section{Describing Anonymity Technologies}
+\subsection{ Network topology}
+\begin{itemize}
+	\item{Wired networks}
+	\subitem{Path topology: P2P, Cascade, Free}
+	\subitem{Path Scheme: Unicast, Multicast, Broadcast}
+	\subitem{Path Type: Cycle Free, Cycle}
+	\item{Wireless networks}
+	\subitem{Topology based}
+	\subitem{Position based}
+\end{itemize}
+\subsection{Anonymity properties}
+\begin{itemize}
+	\item{Unidentifiability}
+	\subitem{Sender Anonymity, Receiver Anonymity, Mutual Anonymity, Group Anonymity}
+	\item{Unlinkability}
+	\subitem{Location Anonymity, Communication Anonymity, Group Comm. Anonymity}
+\end{itemize}
+\subsection{Adversity capabilities}
+\begin{itemize}
+	\item{Reachability: Global or Local}
+	\item{Attackability: Passive or Active}
+	\item{Adaptability: Static or Dynamic}
+\end{itemize}
+
+\section{Design considerations for an anonymity network}
+\subsection{Understanding the threat model}
+\begin{itemize}
+	\item{Attacker capabilities}
+	\item{Attack methodology}
+	\item{Attackers goals: identifying or service blocking}
+\end{itemize}
+\subsection{Typical attack methods}
+\begin{itemize}
+	\item{Traffic analysis}
+	\item{Timing attacks}
+	\item{Watermark attack}
+	\item{Predecessor attack}
+	\item{Path selection attack}
+	\item{Congestion attack}
+	\item{Blocking attack}
+\end{itemize}
+\subsection{Anti-attack design considerations}
+\begin{itemize}
+	\item{Restricting Information Leaking}
+	\item{Node/Directory protection and hardening}
+	\item{Obfuscation/Diffusion}
+	\item{Eliminating connection characteristics}
+	\item{Error Detection and Fault tolerance}
+\end{itemize}
+
+
+\section{Overview of Tor}
+\subsection{Features}
+\begin{itemize}
+	\item{Forward secrecy}
+	\item{leaky-pipe circuit topology}
+	\item{congestion control}
+	\item{Directory authorities}
+	\item{modular architecture}
+	\item{rendezvous points and hidden services}
+	\item{censorship resistance}
+\end{itemize}
+\subsection{Design Goals and assumptions}
+\begin{itemize}
+	\item{Goals:Deployability, Usability, Flexibility, Censorship resistance}
+	\item{Assumptions: Non P2P, susceptible to end-to-end attacks, no traffic shaping, no protocol normalization}
+\end{itemize}
+\subsection{Tor Deconstruction}
+\begin{itemize}
+	\item{Cells}
+	\item{TLS Details}
+	\item{Circuits and Streams: Circuit \& stream construction}
+	\item{Congestion control}
+	\item{Bandwidth distribution and fairness}
+\end{itemize}
+\subsection{Hidden services}
+\subsection{Directory authorities}
+\subsection{Tor controller protocol}
+
+\section{Attacks and Defenses}
+\begin{itemize}
+	\item{Passive Attacks}
+	\subitem{traffic observation}
+	\subitem{content observation}
+	\subitem{time based co-relation attack}
+	\subitem{message size based co-relation attack}
+	\subitem{Site fingerprinting}
+	
+	\item{Active Attacks}
+	\subitem{Compromised keys}
+	\subitem{system intrusion, legal or extralegal coercion}
+	\subitem{malicious recepient}
+	\subitem{malicious onion proxy}
+	\subitem{DoS for traffic redirection}
+	\subitem{Watermarking attacks}
+	\subitem{Replay attacks, smear attacks}
+	\subitem{Protocol content tampering}
+	\subitem{Network DoS}
+	\subitem{Directory Attacks}
+	\subitem{Rendezvous point attacks}
+\end{itemize}
+
+\section{Comparing Tor with other anonymizing networks}
+(Comparison with Tarzan, MorphMix, Crowds, Freedom Network, Herbivore)
+
+\section{Open issues with Tor}
+\begin{itemize}
+	\item{Scalibility}
+	\item{Bandwidth categorization}
+	\item{Node diversity}
+	\item{Traffic shaping/padding}
+	\item{Exit node caching}
+	\item{Directory distribution}
+\end{itemize}
+
+\section{Conclusion}
+\end{document}
