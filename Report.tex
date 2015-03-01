@@ -17,18 +17,20 @@
 	The objective of this review is to educate the reader on Internet privacy and anonymity. This review is intended for people interested in researching privacy enhancing technologies and/or designing such systems. We begin an overview of anonymity technologies and their design considerations. We follow it up with a detailed evaluation of the Tor network, attacks against it, how it defends itself against such attacks and how it compares with other existing low latency anonymity networks. We conclude with discussing some of the open issues with the Tor network in an effort to encourage the reader to take up some of the challenges. 
 \end{abstract}
 
-\section{Introduction}
-\begin{itemize}
-\item{Why is Internet anonymity such a big deal?}
-\item{Is there really a need for anonymity on the Internet?}
-\item{Real world anonymity v/s Internet anonymity. Is it the same?}
-\item{Who are the people most affected by a de-anonymized Internet}
-\item{Why is achieving Internet anonymity a challenge?}
-\item{What are the threats to anonymity on the Internet}
-\item{How is this review organized}
-\end{itemize}
+\section{Introduction} \label{intro}
+Anonymity is derived from the Greek word anonymia, meaning "without a name" or "namelessness". Though accurate this definition does not really capture its essence. To be anonymous means to be non-identifiable, unreachable and untraceable. It is an enabler of values such as privacy and liberty. Upon which the foundations of democracy and freedom of speech are laid.
 
-\section{Background}
+People seek anonymity on the internet for various reasons. Whistle-blowers exposing government or corporate misdoings, Human rights activists reporting abuse from areas of conflict, members of stigmatized groups seeking advice and help without the fear of being identified and ostracised, journalists reporting from countries with severe press censorship and normal people who wish to protect their privacy from unscrupulous marketeers and irresponsible corporations \cite{seekanonymity}.
+
+Although this gives us a convincing argument for the need of internet anonymity. There are still people who do not understand the implications of a de-anonymized internet. The most popular argument against anonymity is the nothing-to-hide retort. This is naive and does not highlight the larger issues at stake. Having nothing to hide does not necessarily justify the need for others to know \cite{thechronicle}. 
+The first casualties of a de-anonymized internet would be Privacy and Freedom of speech. By giving up our privacy we are allowing our governments to monitor our thoughts, actions and potentially every aspect of our lives. A not so benevolent government with such power can turn the dynamics of democracy. Voters would be held accountable for their actions instead of the government. This progression would eventually lead to a totalitarian state \cite{privateinternetaccess}. 
+
+This review is organized as follows: In section \ref{intro} we begin with an introduction on the need for internet anonymity and the people that benefit from it. Section \ref{background} gives a chronological summary of the development of privacy enabling technologies and an overview of the present day technologies. In Section \ref{taxonomy} we describe a model to classify anonymity by its properties, the type of network and adversity capabilities.Section \ref{design} takes a look at the design considerations of an anonymous network, understanding the threat model, typical attacks against the network and defensive countermeasures. 
+In Section \ref{tor} we review Tor, its design goals, assumptions and architecture. Section \ref{tor_attack_defence} we study the attacks against the Tor network and its defences.
+
+Section \ref{comparison} does a comparative study of other popular anonymity networks with Tor. Section \ref{openissues} discusses the open issues with the Tor network and encourages the reader to take up some of these challenges.
+
+\section{Background} \label{background}
 \subsection{Evolution of privacy enabling technologies}
 \begin{itemize}
 	\item{Anonymous email first introduced with Type 0 re-mailers 1997}
@@ -56,7 +58,7 @@
 	\item{Resilient to censorship}
 \end{itemize}
 
-\section{Describing Anonymity Technologies}
+\section{Describing Anonymity Technologies} \label{taxonomy}
 \subsection{ Network topology}
 \begin{itemize}
 	\item{Wired networks}
@@ -81,7 +83,7 @@
 	\item{Adaptability: Static or Dynamic}
 \end{itemize}
 
-\section{Design considerations for an anonymity network}
+\section{Design considerations for an anonymity network} \label{design}
 \subsection{Understanding the threat model}
 \begin{itemize}
 	\item{Attacker capabilities}
@@ -108,7 +110,7 @@
 \end{itemize}
 
 
-\section{Overview of Tor}
+\section{Overview of Tor} \label{tor}
 \subsection{Features}
 \begin{itemize}
 	\item{Forward secrecy}
@@ -136,7 +138,7 @@
 \subsection{Directory authorities}
 \subsection{Tor controller protocol}
 
-\section{Attacks and Defenses}
+\section{Attacks and Defenses} \label{tor_attack_defence}
 \begin{itemize}
 	\item{Passive Attacks}
 	\subitem{traffic observation}
@@ -159,10 +161,10 @@
 	\subitem{Rendezvous point attacks}
 \end{itemize}
 
-\section{Comparing Tor with other anonymizing networks}
+\section{Comparing Tor with other anonymizing networks} \label{comparison}
 (Comparison with Tarzan, MorphMix, Crowds, Freedom Network, Herbivore)
 
-\section{Open issues with Tor}
+\section{Open issues with Tor} \label{openissues}
 \begin{itemize}
 	\item{Scalibility}
 	\item{Bandwidth categorization}
@@ -173,4 +175,7 @@
 \end{itemize}
 
 \section{Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
 \end{document}
