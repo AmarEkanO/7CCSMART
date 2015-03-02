@@ -28,19 +28,25 @@ The first casualties of a de-anonymized internet would be Privacy and Freedom of
 This review is organized as follows: In section \ref{intro} we begin with an introduction on the need for internet anonymity and the people that benefit from it. Section \ref{background} gives a chronological summary of the development of privacy enabling technologies and an overview of the present day technologies. In Section \ref{taxonomy} we describe a model to classify anonymity by its properties, the type of network and adversity capabilities.Section \ref{design} takes a look at the design considerations of an anonymous network, understanding the threat model, typical attacks against the network and defensive countermeasures. 
 In Section \ref{tor} we review Tor, its design goals, assumptions and architecture. Section \ref{tor_attack_defence} we study the attacks against the Tor network and its defences.
 
-Section \ref{comparison} does a comparative study of other popular anonymity networks with Tor. Section \ref{openissues} discusses the open issues with the Tor network and encourages the reader to take up some of these challenges.
+Section \ref{comparison} does a comparative study of other popular anonymity networks with Tor. Section \ref{openissues} discusses the open issues with the Tor network and encourages the reader to take up some of these challenges. Finally we conclude in Section \ref{conclusion}
 
 \section{Background} \label{background}
 \subsection{Evolution of privacy enabling technologies}
-\begin{itemize}
-	\item{Anonymous email first introduced with Type 0 re-mailers 1997}
-	\item{cyberpunk era and Type 1 chain re-mailers}
-	\item{Security issues with Type1 led to creation of Mixmaster or Type 2 re-mailers}
-	\item{ Mixminion or Type 3 re-mailers as a solution to anonymous and pseudonymous email delivery}
-	\item{Ross Anderson's Eternity Service}
-	\item{DC-Net: first p2p approach to sender receiver anonymity}
-	\item{Inception of PipeNet and Onion Routing}
-\end{itemize}
+
+In the mid 80's when the Internet was starting to take off, email was the primary form of electronic communication. The early efforts to bring internet privacy were focused on protecting email communications. Chaum proposed a untraceable mail system where each message would be passed through a series of mixes before being delivered to its final destination. A mix was a computer system located along the path of communication. It would receive a message and process it in a way to remove identifying information about its origins and resend the message to its intended destination. Mixes generally operate periodically collecting messages over a certain period of time and then outputting uniformly sized lexicographically ordered batches. This was done to prevent co-relation attacks on the inputs and outputs of a mix \cite{chaum-mix}. Such networks are known as mix networks.
+
+Another privacy enabling primitive devised by Chaum was Dining Cryptographers Network (or DC-nets) \cite{chaum-dc}. Unlike mix networks, DC-nets allow participants to broadcast their messages at the same time, with no participant-to-participant communication. This non-interactive approach although an attractive feature for system design, DC-nets relies on largely honest participants. A malicious participant could broadcast invalid messages or even drop out of the protocol entirely. The computational cost of making DC-nets fault tolerant to such attack has been prohibitively high, which is an impediment to its practical deployment. However some researchers have tried to come up with suitable alternatives \cite{golle:eurocrypt2004}.
+
+%\begin{itemize}
+%
+%	\item{Anonymous email first introduced with Type 0 re-mailers 1997}
+%	\item{cyberpunk era and Type 1 chain re-mailers}
+%	\item{Security issues with Type1 led to creation of Mixmaster or Type 2 re-mailers}
+%	\item{ Mixminion or Type 3 re-mailers as a solution to anonymous and pseudonymous email delivery}
+%	\item{Ross Anderson's Eternity Service}
+%	\item{DC-Net: first p2p approach to sender receiver anonymity}
+%	\item{Inception of PipeNet and Onion Routing}
+%\end{itemize}
 \subsection{Extant technologies in the 21st century}
 \begin{itemize}
 	\item{Crowds network by AT\&T}
@@ -174,7 +180,7 @@ Section \ref{comparison} does a comparative study of other popular anonymity net
 	\item{Directory distribution}
 \end{itemize}
 
-\section{Conclusion}
+\section{Conclusion} \label{conclusion}
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
