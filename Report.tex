@@ -37,6 +37,12 @@ In the mid 80's when the Internet was starting to take off, email was the primar
 
 Another privacy enabling primitive devised by Chaum was Dining Cryptographers Network (or DC-nets) \cite{chaum-dc}. Unlike mix networks, DC-nets allow participants to broadcast their messages at the same time, with no participant-to-participant communication. This non-interactive approach although an attractive feature for system design, DC-nets relies on largely honest participants. A malicious participant could broadcast invalid messages or even drop out of the protocol entirely. The computational cost of making DC-nets fault tolerant to such attack has been prohibitively high, which is an impediment to its practical deployment. However some researchers have tried to come up with suitable alternatives \cite{golle:eurocrypt2004}.
 
+The anon.penet.fi was probably the earliest and most famous of pseudonymous remailers. It would purge identifying headers form outbound remailed messages. It also supported recipient anonymity by providing the user with a random pseudonym. The remailer maintained a table that matched these assigned pseudonym with the user's real email address. These very early implementations of remailers were known as Type 0 remailers. Due to their rather simplistic design the user could be easily traced if the table maping the pseudonyms to real email addresses was compromised either by legal or illegal means.
+
+Cyberpunk remailers or Type I remailers were designed to address this problem. It dropped the support for pseudonym tables. Secondly the remailer would accept encrypted email, decrypt it and remail it to its destination. This prevented an attacker try to perform message based co-relation on incoming and outgoing traffic. Type I remailers could be chained together to achieve a greater degree of anonymity. Chaining allows a message to be sent through multiple remailers before it is delivered to its destination. Each remailer in the network knows only about the previous remailer that sent it a message. Thus an attacker would have to compromise all the remailers in the network to trace a message. This allowed us to take advantage of using a distributed network of remailers, giving us security by numbers. Type I remailers could also reorder messages to prevent time based co-relation attacks on traffic.
+
+Although an improvement over Type 0 remailers, Type I remailers had a few limitations. 
+
 %\begin{itemize}
 %
 %	\item{Anonymous email first introduced with Type 0 re-mailers 1997}
