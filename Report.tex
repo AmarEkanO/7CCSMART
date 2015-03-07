@@ -43,18 +43,10 @@ Type I remailers (popularly known as Cyberpunk remailers) were designed to addre
 
 Although an improvement over Type 0 remailers, Type I remailers had certain limitations, specifically their are susceptibility to size based correlation attacks and reply attacks. To mitigate these limitations 'Mixmaster' or Type II remailer was developed. Type II remailers always use chaining and each chain link is always encrypted. To prevent size based co-relation attacks messages are padded to a constant length. To prevent time based co-relation attacks continuously generated random traffic was inserted into the communication channel. To prevent replay attacks, Mixmaster 2.0 kept list of recent message IDs and would discard messages that it had received previously \cite{mixmaster-spec}.
 
-Mixmaster was certainly superior to its predecessors Type 0 and Type I remailers, but it had a certain functional limitations and security weaknesses. One major limitation of Mixmaster was the problem of replying to anonymous messages. To reply one had to resort to using the older and less secure Type I remailer. The defences against replay attacks were easily subverted. Mixmaster would cache the ID's of received messages but would store them for a fixed interval of time. An attacker would just have to wait till the entries expire and replay the messages. Mixmaster did not have a consistent way of distributing information about remailer availability, performance and encryption keys to participants. This allowed attackers to mount partitioning attacks to compromise remailer security. To address these issues Mixminion or Type III remailers were introduced \cite{minion-design}.
+Mixmaster was certainly superior to its predecessors Type 0 and Type I remailers, but it had certain functional limitations and security weaknesses. One major limitation of Mixmaster was the problem of replying to anonymous messages. To reply one had to resort to using the older and less secure Type I remailer. The defences against replay attacks were easily subverted. Mixmaster would cache the ID's of received messages but would store them for a fixed interval of time. An attacker would just have to wait till the entries expire and replay the messages. Mixmaster did not have a consistent way of distributing information about remailer availability, performance and encryption keys to participants. This allowed attackers to mount partitioning attacks to compromise remailer security. To address these issues Mixminion or Type III remailers were introduced \cite{minion-design}.
 
-%\begin{itemize}
-%
-%	\item{Anonymous email first introduced with Type 0 re-mailers 1997}
-%	\item{cyberpunk era and Type 1 chain re-mailers}
-%	\item{Security issues with Type1 led to creation of Mixmaster or Type 2 re-mailers}
-%	\item{ Mixminion or Type 3 re-mailers as a solution to anonymous and pseudonymous email delivery}
-%	\item{Ross Anderson's Eternity Service}
-%	\item{DC-Net: first p2p approach to sender receiver anonymity}
-%	\item{Inception of PipeNet and Onion Routing}
-%\end{itemize}
+By 1997 remailers were well established as a privacy enabling technology \cite{goldberg97privacyenhancing}. Apart from email some researchers such as Ross Anderson and Adam Back were working on a platform that provided redundancy and resilience to censorship. Documents published via this platform could not be "unpublished". This proposed platform was called the Eternity Service \cite{anderson96eternity}. Projects such as PipeNet\cite{pipenet10} and Onion Routing \cite{onion-routing:ih96} took the initiative to develop a platform for general internet anonymity. PipeNet was eventually shelved due to lack of interest and never made it past the design stages. Onion Routing on the other hand was a promising candidate to build low latency anonymous networks. Unlike PipeNet, Onion Routing leaned more towards performance and robustness. PipeNet preferred security over performance and would terminate its operation if its security was compromised in any way.
+
 \subsection{Extant technologies in the 21st century}
 \begin{itemize}
 	\item{Crowds network by AT\&T}
