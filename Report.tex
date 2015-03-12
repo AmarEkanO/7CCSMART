@@ -1,5 +1,6 @@
 \documentclass{llncs}
 \usepackage{graphicx}
+\usepackage{csquotes}
 
 
 \begin{document}
@@ -62,14 +63,15 @@ Some of the modern day networks currently in development are GlobaLeaks \cite{gl
 
 \subsection{The rising popularity of Tor}
 The detailed discussion of all these technologies is beyond the scope of this review, instead we take up the discussion of the Tor network since it has been well researched by academia and has the largest user base among anonymity networks \cite{tor-metrics}.
-%\begin{itemize}
-%	\item{Perfect forward secrecy}
-%	\item{low latency anonymity network}
-%	\item{approx 2000 relay nodes on the Internet: more than any other anonymizing network}
-%	\item{Existing internet applications can be used without modification (HTTP, IRC, FTP, SSH, etc)}
-%	\item{Availability of Hidden services}
-%	\item{Resilient to censorship}
-%\end{itemize}
+
+Tor is a distributed low latency anonymous network. It is run by volunteers who provide network bandwidth and processing power to the Tor network by setting up a Tor node to service users of the Tor network to anonymously access the Internet. Tor is an open source project licensed under BSD. Tor is an implementation of Onion Routing which was first developed by the U.S. Naval Research Laboratory. The project was then handed over to the Electronic Frontier Foundation (EFF) in 2004 which oversaw the development and funding of the project. In 2006 two of the original authors of the project and five other developers founded the Tor Project, a non-profit research and education based organization based out of Massachusetts, US responsible for maintaining Tor. The EFF played the role of a financial sponsor. Since then in a span of eight years Tor grew from less than 2000 nodes to over 6000 nodes \cite{tor-metrics}.Apart from the EFF, Tor is also funded by contributions from Human Rights organizations, Privacy advocates, scientific research organisations and public contributions.
+ 
+What makes Tor so popular as compared to other networks is that it was designed with the intention that its users could access the clear Internet while still being anonymous. Other networks such as I2P do not natively support clear Internet access. Tor was designed to be a low latency network so that existing time sensitive internet applications could be compatible without having to modify these applications. Remailer technology such as Mixmaster and Mixminion are high latency networks and are unsuitable for applications such as web browsing, internet chat or remote administration.
+
+In 2011, The Tor Project received the 2010 Award for Projects of Social Benefit form the Free Software Foundation. The organization was quoted  
+\begin{displayquote}
+Using free software, Tor has enabled roughly 36 million people around the world to experience freedom of access and expression on the Internet while keeping them in control of their privacy and anonymity. Its network has proved pivotal in dissident movements in both Iran and more recently Egypt.\cite{free-software-foundation}
+\end{displayquote}
 
 \section{Describing Anonymity Technologies} \label{taxonomy}
 \subsection{ Network topology}
