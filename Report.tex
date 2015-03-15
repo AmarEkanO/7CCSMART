@@ -66,14 +66,36 @@ The detailed discussion of all these technologies is beyond the scope of this re
 
 Tor is a distributed low latency anonymous network. It is run by volunteers who provide network bandwidth and processing power to the Tor network by setting up a Tor node to service users of the Tor network to anonymously access the Internet. Tor is an open source project licensed under BSD. Tor is an implementation of Onion Routing which was first developed by the U.S. Naval Research Laboratory. The project was then handed over to the Electronic Frontier Foundation (EFF) in 2004 which oversaw the development and funding of the project. In 2006 two of the original authors of the project and five other developers founded the Tor Project, a non-profit research and education based organization based out of Massachusetts, US responsible for maintaining Tor. The EFF played the role of a financial sponsor. Since then in a span of eight years Tor grew from less than 2000 nodes to over 6000 nodes \cite{tor-metrics}.Apart from the EFF, Tor is also funded by contributions from Human Rights organizations, Privacy advocates, scientific research organisations and public contributions.
  
-What makes Tor so popular as compared to other networks is that it was designed with the intention that its users could access the clear Internet while still being anonymous. Other networks such as I2P do not natively support clear Internet access. Tor was designed to be a low latency network so that existing time sensitive internet applications could be compatible without having to modify these applications. Remailer technology such as Mixmaster and Mixminion are high latency networks and are unsuitable for applications such as web browsing, internet chat or remote administration.
+What makes Tor so popular as compared to other networks is that it was designed with the intent that its users could access the clear Internet while still being anonymous. Other networks such as I2P do not natively support clear Internet access. Tor was designed to be a low latency network so that existing time sensitive internet applications could be compatible without having to modify these applications. Remailer technology such as Mixmaster and Mixminion are high latency networks and are unsuitable for applications such as web browsing, internet chat or remote administration.
 
-In 2011, The Tor Project received the 2010 Award for Projects of Social Benefit form the Free Software Foundation. The organization was quoted  
+In 2011, The Tor Project received the 2010 Award for Projects of Social Benefit form the Free Software Foundation. The organization was quoted saying
 \begin{displayquote}
 Using free software, Tor has enabled roughly 36 million people around the world to experience freedom of access and expression on the Internet while keeping them in control of their privacy and anonymity. Its network has proved pivotal in dissident movements in both Iran and more recently Egypt.\cite{free-software-foundation}
 \end{displayquote}
 
 \section{Describing Anonymity Technologies} \label{taxonomy}
+
+Before we can begin a discussion about Tor,  we need a way to describe anonymity networks in general. Kelly et al. proposed a Cubic Taxonomy to describe anonymity properties, adversity capabilities and network topology \cite{kelly2012exploring}.
+\subsection{Anonymity properties}
+Anonymity properties can be broadly classified as unidentifiability, unlinkibality and unobservability. Unidentifiability means that an adversary is unbale to distinguish an individual or a groups identity from a set of individuals or groups. Unlinkability means an adversary is unable to form relations between individuals, messages, activities or information of interest by observing the system. Additionally the adversary's priori and posteriori knowledge of the system remain unchanged. Unobservability means that an adversary is unable to observe messages or other information as opposed to identities of individuals or relations between them.
+
+Udentifiability can be sub-categorized as Sender Anonymity, Receiver Anonymity, Mutual Anonymity and Group Anonymity. The definitions of these properties is as follows.
+\begin{itemize}
+\item[]{\textbf{Sender Anonymity:} Is achieved when a particular message cannot be identified with a specific sender}
+\item[]{\textbf{Receiver Anonymity:} Is achieved when a particular message cannot be identified with a specific receiver}
+\item[]{\textbf{Mutual Anonymity:} This not only achieves Sender and Receiver Anonymity, but also ensures that the sender cannot identify the recipient and the recipient cannot identify the sender}
+\item[]{\textbf{Group Anonymity:} Is achieved when a particular message cannot be identified with a group. As of today there are no known group anonymizing services.}
+\end{itemize}
+
+
+    
+%\begin{itemize}
+%	\item{Unidentifiability}
+%	\subitem{Sender Anonymity, Receiver Anonymity, Mutual Anonymity, Group Anonymity}
+%	\item{Unlinkability}
+%	\subitem{Location Anonymity, Communication Anonymity, Group Comm. Anonymity}
+%\end{itemize}
+
 \subsection{ Network topology}
 \begin{itemize}
 	\item{Wired networks}
@@ -84,13 +106,7 @@ Using free software, Tor has enabled roughly 36 million people around the world 
 	\subitem{Topology based}
 	\subitem{Position based}
 \end{itemize}
-\subsection{Anonymity properties}
-\begin{itemize}
-	\item{Unidentifiability}
-	\subitem{Sender Anonymity, Receiver Anonymity, Mutual Anonymity, Group Anonymity}
-	\item{Unlinkability}
-	\subitem{Location Anonymity, Communication Anonymity, Group Comm. Anonymity}
-\end{itemize}
+
 \subsection{Adversity capabilities}
 \begin{itemize}
 	\item{Reachability: Global or Local}
@@ -122,6 +138,14 @@ Using free software, Tor has enabled roughly 36 million people around the world 
 	\item{Obfuscation/Diffusion}
 	\item{Eliminating connection characteristics}
 	\item{Error Detection and Fault tolerance}
+\end{itemize}
+\subsection{Mesauring Anonymity}
+\begin{itemize}
+	\item{Anonymity Set Size}
+	\item{K-Anonymity}
+	\item{Individual Anonymity Degree}
+	\item{Entropy Anonymity}
+	\item{Effective Anonymity Set size}
 \end{itemize}
 
 
