@@ -74,10 +74,10 @@ Using free software, Tor has enabled roughly 36 million people around the world 
 \end{displayquote}
 
 \section{Describing Anonymity Technologies} \label{taxonomy}
+Before we can begin a discussion about Tor,  we need a way to describe anonymity networks in general. Kelly et al. proposed a Cubic Taxonomy to describe anonymity properties, adversity capabilities and network topology \cite{kelly2012exploring}. This section is a summary of their work on Cubic Taxonomy and gives us an understanding of the underlying properties of anonymity networks.
 
-Before we can begin a discussion about Tor,  we need a way to describe anonymity networks in general. Kelly et al. proposed a Cubic Taxonomy to describe anonymity properties, adversity capabilities and network topology \cite{kelly2012exploring}.
 \subsection{Anonymity properties}
-Anonymity properties can be broadly classified as unidentifiability, unlinkibality and unobservability. Unidentifiability means that an adversary is unbale to distinguish an individual or a groups identity from a set of individuals or groups. Unlinkability means an adversary is unable to form relations between individuals, messages, activities or information of interest by observing the system. Additionally the adversary's priori and posteriori knowledge of the system remain unchanged. Unobservability means that an adversary is unable to observe messages or other information as opposed to identities of individuals or relations between them.
+Anonymity properties can be broadly classified as unidentifiability, unlinkibality and unobservability. Unidentifiability means that an adversary is unable to distinguish an individual or a groups identity from a set of individuals or groups. Unlinkability means an adversary is unable to form relations between individuals, messages, activities or information of interest by observing the system. Additionally the adversary's priori and posteriori knowledge of the system remain unchanged. Unobservability means that an adversary is unable to observe messages or other information as opposed to identities of individuals or relations between them.
 
 Udentifiability is composed of four properties. Sender Anonymity, Receiver Anonymity, Mutual Anonymity and Group Anonymity. The definitions of these properties is as follows.
 \begin{itemize}
@@ -96,6 +96,15 @@ Unlinkability is composed of three properties. Location Anonymity, Communication
 
 The classical definition of Unidentifiability is composed of Sender and Receiver anonymity and Unlinkability consists only of Communication Anonymity. Kelly et al. \cite{kelly2012exploring} under the Cubic Taxonomy extends the definition by including Mutual Anonymity and Group Anonymity to Unidentifiability and Location Anonymity and Group Communication Anonymity to Unlinkability. They also noted the fact that at the time of publishing their work there were group anonymizing services that were in existence.
 
+\subsection{Adversity capabilities}
+An adversary is defined as an agent or a group of agents with an aim to degrade or eliminate anonymity. Understanding adversity capabilities helps us in developing a threat model for an anonymity network. Adversity capabilities are categorized as Reachability, Attackability and Adaptability.
+
+%\begin{itemize}
+%	\item{Reachability: Global or Local}
+%	\item{Attackability: Passive or Active}
+%	\item{Adaptability: Static or Dynamic}
+%\end{itemize}
+
 \subsection{ Network topology}
 \begin{itemize}
 	\item{Wired networks}
@@ -105,13 +114,6 @@ The classical definition of Unidentifiability is composed of Sender and Receiver
 	\item{Wireless networks}
 	\subitem{Topology based}
 	\subitem{Position based}
-\end{itemize}
-
-\subsection{Adversity capabilities}
-\begin{itemize}
-	\item{Reachability: Global or Local}
-	\item{Attackability: Passive or Active}
-	\item{Adaptability: Static or Dynamic}
 \end{itemize}
 
 \section{Design considerations for an anonymity network} \label{design}
