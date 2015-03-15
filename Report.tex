@@ -79,22 +79,22 @@ Before we can begin a discussion about Tor,  we need a way to describe anonymity
 \subsection{Anonymity properties}
 Anonymity properties can be broadly classified as unidentifiability, unlinkibality and unobservability. Unidentifiability means that an adversary is unbale to distinguish an individual or a groups identity from a set of individuals or groups. Unlinkability means an adversary is unable to form relations between individuals, messages, activities or information of interest by observing the system. Additionally the adversary's priori and posteriori knowledge of the system remain unchanged. Unobservability means that an adversary is unable to observe messages or other information as opposed to identities of individuals or relations between them.
 
-Udentifiability can be sub-categorized as Sender Anonymity, Receiver Anonymity, Mutual Anonymity and Group Anonymity. The definitions of these properties is as follows.
+Udentifiability is composed of four properties. Sender Anonymity, Receiver Anonymity, Mutual Anonymity and Group Anonymity. The definitions of these properties is as follows.
 \begin{itemize}
-\item[]{\textbf{Sender Anonymity:} Is achieved when a particular message cannot be identified with a specific sender}
-\item[]{\textbf{Receiver Anonymity:} Is achieved when a particular message cannot be identified with a specific receiver}
-\item[]{\textbf{Mutual Anonymity:} This not only achieves Sender and Receiver Anonymity, but also ensures that the sender cannot identify the recipient and the recipient cannot identify the sender}
-\item[]{\textbf{Group Anonymity:} Is achieved when a particular message cannot be identified with a group. As of today there are no known group anonymizing services.}
+\item[]{\textbf{Sender Anonymity:} Is achieved when a particular message cannot be identified with a specific sender.}
+\item[]{\textbf{Receiver Anonymity:} Is achieved when a particular message cannot be identified with a specific receiver.}
+\item[]{\textbf{Mutual Anonymity:} This not only achieves Sender and Receiver Anonymity, but also ensures that the sender cannot identify the recipient and the recipient cannot identify the sender.}
+\item[]{\textbf{Group Anonymity:} Is the same as Sender/Receiver Anonymity but when applied in the context of a group instead of individuals.}
 \end{itemize}
 
+Unlinkability is composed of three properties. Location Anonymity, Communication Anonymity and Group Communication Anonymity. Each of which are defined as follows.
+\begin{itemize}
+	\item[]{\textbf{Location Anonymity:} Is achieved when a particular message is not linked to an individuals location or movement.}
+	\item[]{\textbf{Communication Anonymity:} Is achieved when a particular message cannot be linked to any sender receiver pair and no message is linkable to a particular sender receiver pair.}
+	\item[]{\textbf{Group Communication Anonymity}: Is the same as Communication Anonymity but in the context of sender and receiver groups instead of individuals.}
+\end{itemize}
 
-    
-%\begin{itemize}
-%	\item{Unidentifiability}
-%	\subitem{Sender Anonymity, Receiver Anonymity, Mutual Anonymity, Group Anonymity}
-%	\item{Unlinkability}
-%	\subitem{Location Anonymity, Communication Anonymity, Group Comm. Anonymity}
-%\end{itemize}
+The classical definition of Unidentifiability is composed of Sender and Receiver anonymity and Unlinkability consists only of Communication Anonymity. Kelly et al. \cite{kelly2012exploring} under the Cubic Taxonomy extends the definition by including Mutual Anonymity and Group Anonymity to Unidentifiability and Location Anonymity and Group Communication Anonymity to Unlinkability. They also noted the fact that at the time of publishing their work there were group anonymizing services that were in existence.
 
 \subsection{ Network topology}
 \begin{itemize}
