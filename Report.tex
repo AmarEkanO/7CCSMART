@@ -117,6 +117,17 @@ Wired networks are composed of Path topology, Route scheme and Path type. It is 
 
 Wireless networks are classified as Topology based or Position based. A Topology based network uses its link information to perform routing operations. Position based networks uses its nodes geolocation to perform routing operations. Each of these routing strategies use a proactive approach, reactive approach or a combination of both. In a proactive protocol, the nodes periodically exchange control information among themselves to make routing decisions and learn about network changes. A reactive protocol use an on-demand approach to generating routes. When users want to communicate the network sends out probes to create a route for communication. A hybrid protocol is a combination of both a proactive and reactive protocols.
 
+\subsection{Mesauring Anonymity}
+Consider an network with four members. Alice and Bob are members of this network and Bob wants to send Alice a message anonymously. If an adversary Eve believes that the message received by Bob was from one of the other three members in the network, then sender anonymity is preserved. If Eve determines that the Alice did receive the message then receiver anonymity is eliminated. Knowing that Alice was the recipient degrades communication anonymity since Eve can reduce the number of sender-receiver relationships since she can eliminate the two other members of the network as recipients of the message.
+
+Kelly et al. \cite{kelly2012exploring} reviewed several probabilistic and deterministic methods of measuring anonymity. This allows us to determine the level or change in anonymity of individual identities or the relationships between when under attack. Some of them are summarized below. 
+\begin{itemize}
+	\item[]{\textbf{Anonymity Set Size:} In this model the level of anonymity is a function of the number of members. In a network of N members if C are compromised by an attacker. Then the level of anonymity reduces to a function of N-C members. If C is kept at zero then anonymity is preserved. If 1 < C < N then anonymity is degraded and eliminated when C = N-1.}
+	\item[]{\textbf{K-Anonymity:} In this model determines the level of anonymity by determining the minimum number of individuals or individual pairs that form part of the anonymity set. In the example of discussed previously a 3-anonymity is achieved since Eve believes that one of the three members sent a message to Alice.}
+	\item[]{\textbf{Individual Anonymity Degree:} In the Individual Anonymity Degree model, the adversary associates a probability of being exposed to each individual in the network. The adversary also sets a threshold value on the probability to determine if an individual is exposed. During the attack the adversary is constantly updating these values from the information learned from the network.}
+	\item[]{\textbf{Entropy Anonymity:} This model determines the level of uncertainty or randomness in a given anonymity set. The higher the entropy in the probability distribution among individuals the harder it is for an adversary to determine the identities or relationships between individuals.}
+\end{itemize}
+
 \section{Design considerations for an anonymity network} \label{design}
 \subsection{Understanding the threat model}
 \begin{itemize}
@@ -142,15 +153,6 @@ Wireless networks are classified as Topology based or Position based. A Topology
 	\item{Eliminating connection characteristics}
 	\item{Error Detection and Fault tolerance}
 \end{itemize}
-\subsection{Mesauring Anonymity}
-\begin{itemize}
-	\item{Anonymity Set Size}
-	\item{K-Anonymity}
-	\item{Individual Anonymity Degree}
-	\item{Entropy Anonymity}
-	\item{Effective Anonymity Set size}
-\end{itemize}
-
 
 \section{Overview of Tor} \label{tor}
 \subsection{Features}
