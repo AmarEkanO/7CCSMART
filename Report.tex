@@ -94,16 +94,16 @@ Unlinkability is composed of three properties. Location Anonymity, Communication
 	\item[]{\textbf{Group Communication Anonymity}: Is the same as Communication Anonymity but in the context of sender and receiver groups instead of individuals.}
 \end{itemize}
 
-The classical definition of Unidentifiability is composed of Sender and Receiver anonymity and Unlinkability consists only of Communication Anonymity. Kelly et al. \cite{kelly2012exploring} under the Cubic Taxonomy extends the definition by including Mutual Anonymity and Group Anonymity to Unidentifiability and Location Anonymity and Group Communication Anonymity to Unlinkability. They also noted the fact that at the time of publishing their work there were group anonymizing services that were in existence.
+The classical definition of Unidentifiability is composed of Sender and Receiver anonymity and Unlinkability consists only of Communication Anonymity. Kelly et al. \cite{kelly2012exploring} extend the definition under the Cubic Taxonomy by including Mutual Anonymity and Group Anonymity to Unidentifiability and Location Anonymity and Group Communication Anonymity to Unlinkability. They also noted the fact that at the time of publishing their work there were group anonymizing services that were in existence.
 
 \subsection{Adversity capabilities}
 An adversary is defined as an agent or a group of agents with an aim to degrade or eliminate anonymity. Understanding adversity capabilities helps us in developing a threat model for an anonymity network. Adversity capabilities are categorized as Reachability, Attackability and Adaptability.
 
-%\begin{itemize}
-%	\item{Reachability: Global or Local}
-%	\item{Attackability: Passive or Active}
-%	\item{Adaptability: Static or Dynamic}
-%\end{itemize}
+\begin{itemize}
+	\item[]{\textbf{Reachability:} An adversity's reachability is either local or global. A global adversary has access to all the nodes and links in the network. A local adversary has access to only a portion of the network's nodes and links. The adversary reachability defines the extent of his knowledge of the system.}
+	\item[]{\textbf{Adaptability:} An anonymous network can be either static or dynamic. In a static network the adversary's knowledge of the system and its targets remains constant during and after an attack. A dynamic network could prevent an adversary launching a successful attack but at the same time it could be leaking information to the adversary. In a static network the adversary's priori knowledge remains constant, but in a dynamic network the posterior knowledge could potentially increase.}
+	\item[]{\textbf{Attackability:} An adversary can be passive or active in nature and internal or external to the network being attacked. A passive/external adversary is part of the surrounding of the anonymous network and is capable of compromising links. An active/internal adversary is part of the anonymous network and is capable of participating in the communication and may also control some of the nodes in the network.}
+\end{itemize}
 
 \subsection{ Network topology}
 \begin{itemize}
