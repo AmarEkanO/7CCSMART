@@ -181,16 +181,16 @@ Every router in the network maintains two keys. One is a long term key used to s
 Fixed sized messages called cells are used for OR-OR and OP-OR communication. Each cell is 512 bytes in size and consists of a header and a payload. The header contains a circuit identifier to specify which circuit the cell refers to and a command to for the recipient to decide what to do with the payload.
 Based on the command, cells are either control cells or relay cells. Control cells are always interpreted by the node that receives it. Relay cells carry stream data. Relay cells have an additional header to identify the stream, a checksum for integrity, length of the payload and a relay command. The contents of a relay cell are encrypted/decrypted using 128-bit AES cipher in counter mode to generate a cipher stream.
 
-%\begin{itemize}
-%	\item{Cells}
-%	\item{TLS Details}
-%	\item{Circuits and Streams: Circuit \& stream construction}
-%	\item{Congestion control}
-%	\item{Bandwidth distribution and fairness}
-%\end{itemize}
-%\subsection{Hidden services}
-%\subsection{Directory authorities}
-%\subsection{Tor controller protocol}
+\\ \\
+\textbf{Circuits and Streams}
+\\
+Circuits channel TCP streams within the Tor network. A circuit can be shared by multiple TCP streams. Since setting up a circuit is a time consuming process, users preemptively create circuits. To prevent linkability new circuits are periodically created and old used circuits are expired. Typically circuit rotation occurs once a minute. Circuit creation is initiated by the OP and is constructed by negotiating a symmetric key with each OR on the circuit one hop at a time. The OP sends the first OR on the path a create command cell. Using Diffie-Hellman handshake they negotiate a key K. Once the circuit has been established relay messages are exchanged using the key K. To extend the circuit the OP sends a relay extend cell specifying the address of the next OR along with sufficient information to start a Diffie-Hellman key exchange with the next OR. If the circuit is extended successfully then a the newly added OR responds with the second half of the Diffie-Hellman key exchange and thus the OP and the newly added OR negotiate a key K'. To extend the circuit further the OP has to tell the last node in the circuit to extend to the next specified OR and a similar key exchange protocol is observed.
+\\ \\
+Relay cells
+When a OR receives a relay cell it decrypts the relay header and payload with the key negotiated for that circuit. The OR validates the message integrity by validating the digest. If valid it accepts and processes the relay, if the check fails an error has occurred and the circuit is torn down.
+To construct a relay cell the OP/OR adds a digest and then iteratively encrypts the payload with the keys negotiated for the circuit and forwards it to the next hop.
+To tear down a circuit the OP sends a destroy control cell. Like circuit creation, tear down is an incremental process. Each OR that receives the destroy cell, closes all streams on that circuit and passes a ne destroy cell to the next hop until the final hop is reached.
+Similarly the OP can truncate a circuit by sending relay truncate cell to a single OR. The OR then sends a destroy cell to the forward circuit and extends the circuit to different nodes, without the intermediate nodes being aware of this change. Similarly if a OR in the circuit goes offline, the adjacent OR will send a relay truncated cell back to the OP. 
 
 \section{Attacks and Defenses} \label{tor_attack_defence}
 \begin{itemize}
