@@ -160,12 +160,13 @@ Tor is a distributed overlay network designed to anonymize TCP traffic. The orig
 Onion Routing uses a distributed network to anonymize TCP traffic. Tor clients build a path within this network composed of nodes called Onion Routers. This path is known as a circuit. Each router in the circuit has information about the next router in the circuit and the previous router. It has no information about other nodes in the network. Each link in the Tor network uses symmetric encryption and traffic is encrypted and marshalled into fixed size cells. 
 \begin{itemize}
 	\item[]{\textbf{Forward secrecy:} To achieve forward secrecy Tor uses an incremental path building strategy. The initiator of the communication negotiates session keys with the next node in the path. Keys would be periodically renegotiated so that a hostile node would not be able to decrypt recorded messages. Unlike the original Onion Routing protocol where each message was multiply encrypted before being sent along the path, a hostile node could record these messages and compromise successive nodes in the circuit and force them to decrypt the messages.}
-	\item{leaky-pipe circuit topology}
-	\item{congestion control}
-	\item{Directory authorities}
-	\item{modular architecture}
-	\item{rendezvous points and hidden services}
-	\item{censorship resistance}
+	\item[]{\textbf{Application Compatibility:} In the original Onion Routing paper applications would have to build application proxies to be able to communicate. Tor opted to use the SOCKS proxy interface so that existing TCP applications could work with the network without any significant code changes}
+	\item[]{\textbf{TCP stream multiplexing:} Instead of building a separate circuit for each application that wanted to communicate as prescribed by the original Onion Routing protocol. Tor allows multiple TCP streams to utilize the same circuit. The user can control which streams to allow or deny a circuit.}
+	\item[]{\textbf{Redirecting traffic in transit:} Tor allows in-band signalling to which lets initiators of communication change the path of traffic flow while still in transit through circuit. This helps in preventing traffic-shaping and message size based co-relation attacks.}
+	\item[]{\textbf{Directory authorities:} Tor uses trusted nodes known as Directory Authorities to distribute routing information to clients. These trusted nodes collaborate to maintain a list of trusted routers and their current state to requesters.}
+	\item[]{\textbf{Configuration of Exit policies:} Node operators can configure the type of traffic that can exit from its nodes to reach the clear internet. The policy describes the hosts and ports the node will connect to.}
+	\item[]{\textbf{Censorship resistance:} Tor allows its users to setup bridge nodes which circumvent attempts to block access to the network. These are not listed with the Directory authorities and is only known to the users of the bridge, this is done to prevent its IP address from being blocked.}
+	\item[]{\textbf{Rendezvous points and hidden services:} The original Onion routing protocol required 'reply onions' to build circuits to connect to hidden services. Due to their always online and fixed keys, Reply onions did not preserve receiver anonymity. Tor improved upon this by allowing clients to negotiate rendezvous points to connect to hidden services, thus preserving receiver anonymity.}
 \end{itemize}
 \subsection{Design Goals and assumptions}
 \begin{itemize}
