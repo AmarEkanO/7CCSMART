@@ -155,9 +155,11 @@ Kelly et al. \cite{kelly2012exploring} reviewed several probabilistic and determ
 \end{itemize}
 
 \section{Overview of Tor} \label{tor}
+Tor is a distributed overlay network designed to anonymize TCP traffic. The original paper on the seminal work of Dingledine et al. \cite{tor-design} was published in 2004, since then there have been significant improvements to the system. In this section we discuss the salient features of Tor, its design and architecture and finally attacks and defences of the network. 
 \subsection{Features}
+Onion Routing uses a distributed network to anonymize TCP traffic. Tor clients build a path within this network composed of nodes called Onion Routers. This path is known as a circuit. Each router in the circuit has information about the next router in the circuit and the previous router. It has no information about other nodes in the network. Each link in the Tor network uses symmetric encryption and traffic is encrypted and marshalled into fixed size cells. 
 \begin{itemize}
-	\item{Forward secrecy}
+	\item[]{\textbf{Forward secrecy:} To achieve forward secrecy Tor uses an incremental path building strategy. The initiator of the communication negotiates session keys with the next node in the path. Keys would be periodically renegotiated so that a hostile node would not be able to decrypt recorded messages. Unlike the original Onion Routing protocol where each message was multiply encrypted before being sent along the path, a hostile node could record these messages and compromise successive nodes in the circuit and force them to decrypt the messages.}
 	\item{leaky-pipe circuit topology}
 	\item{congestion control}
 	\item{Directory authorities}
