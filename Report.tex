@@ -166,24 +166,31 @@ Onion Routing uses a distributed network to anonymize TCP traffic. Tor clients b
 	\item[]{\textbf{Directory authorities:} Tor uses trusted nodes known as Directory Authorities to distribute routing information to clients. These trusted nodes collaborate to maintain a list of trusted routers and their current state to requesters.}
 	\item[]{\textbf{Configuration of Exit policies:} Node operators can configure the type of traffic that can exit from its nodes to reach the clear internet. The policy describes the hosts and ports the node will connect to.}
 	\item[]{\textbf{Censorship resistance:} Tor allows its users to setup bridge nodes which circumvent attempts to block access to the network. These are not listed with the Directory authorities and is only known to the users of the bridge, this is done to prevent its IP address from being blocked.}
-	\item[]{\textbf{Rendezvous points and hidden services:} The original Onion routing protocol required 'reply onions' to build circuits to connect to hidden services. Due to their always online and fixed keys, Reply onions did not preserve receiver anonymity. Tor improved upon this by allowing clients to negotiate rendezvous points to connect to hidden services, thus preserving receiver anonymity.}
+		\item[]{\textbf{Rendezvous points and hidden services:} The original Onion routing protocol required 'reply onions' to build circuits to connect to hidden services. Due to their always online and fixed keys, Reply onions did not preserve receiver anonymity. Tor improved upon this by allowing clients to negotiate rendezvous points to connect to hidden services, thus preserving receiver anonymity.}
 \end{itemize}
-\subsection{Design Goals and assumptions}
-\begin{itemize}
-	\item{Goals:Deployability, Usability, Flexibility, Censorship resistance}
-	\item{Assumptions: Non P2P, susceptible to end-to-end attacks, no traffic shaping, no protocol normalization}
-\end{itemize}
-\subsection{Tor Deconstruction}
-\begin{itemize}
-	\item{Cells}
-	\item{TLS Details}
-	\item{Circuits and Streams: Circuit \& stream construction}
-	\item{Congestion control}
-	\item{Bandwidth distribution and fairness}
-\end{itemize}
-\subsection{Hidden services}
-\subsection{Directory authorities}
-\subsection{Tor controller protocol}
+
+\subsection{Design and Architecture}
+Tor's design goals were that it must work with existing Internet infrastructure, be easy to implement and use since a large user base is a security requirement and the design should be simple and flexible so that it is well understood and eases security analysis. Some goals such as making it decentralized such as P2P networks, protection against end-to-end traffic analysis attacks and Normalization of Internet layer protocols have not been included to keep the design simple and deployable.
+
+Each node in the Tor network runs an Onion Router (OR). An OR maintains Transport Layer Security (TLS) session with other routers in the network. An OR can be run as a user-level process without any special privileges. Each user runs an Onion Proxy (OP) to query Directory Authorities, create circuits and handle connections from user applications. OPs accept TCP data and multiplex them across circuits. ORs at the end of the circuits connect to the intended recipients and relay the data.
+
+Every router in the network maintains two keys. One is a long term key used to sign TLS certificates, Router descriptors and collaborating directories. A router descriptor stores information about the router's keys, address, bandwidth, exit policy and so on. The long term key is known as the identity key. The other key is a short term key also called the onion key. The onion key is used to decrypt requests and to setup a circuit and exchange session keys. ORs communicate using the TLS protocol. To prevent key compromise attacks the onion keys are periodically rotated and independently.
+\\ \\
+\textbf{Cells}
+\\
+Fixed sized messages called cells are used for OR-OR and OP-OR communication. Each cell is 512 bytes in size and consists of a header and a payload. The header contains a circuit identifier to specify which circuit the cell refers to and a command to for the recipient to decide what to do with the payload.
+Based on the command, cells are either control cells or relay cells. Control cells are always interpreted by the node that receives it. Relay cells carry stream data. Relay cells have an additional header to identify the stream, a checksum for integrity, length of the payload and a relay command. The contents of a relay cell are encrypted/decrypted using 128-bit AES cipher in counter mode to generate a cipher stream.
+
+%\begin{itemize}
+%	\item{Cells}
+%	\item{TLS Details}
+%	\item{Circuits and Streams: Circuit \& stream construction}
+%	\item{Congestion control}
+%	\item{Bandwidth distribution and fairness}
+%\end{itemize}
+%\subsection{Hidden services}
+%\subsection{Directory authorities}
+%\subsection{Tor controller protocol}
 
 \section{Attacks and Defenses} \label{tor_attack_defence}
 \begin{itemize}
