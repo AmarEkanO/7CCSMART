@@ -217,14 +217,15 @@ Introduction points are vulnerable to DoS attacks and measures must be taken by 
 
 \section{Attacks and Defenses} \label{tor_attack_defence}
 \begin{itemize}
-	\item{Passive Attacks}
-	\subitem{traffic observation}
-	\subitem{content observation}
-	\subitem{time based co-relation attack}
-	\subitem{message size based co-relation attack}
-	\subitem{Site fingerprinting}
+	\item[]{\textbf{Passive Attacks}}
+	\subitem{\textbf{Traffic observation:} Although an adversary cannot detect the users destination. It can observe traffic patterns of data sent and received. Although further processing may be required, users can be profiled based on their traffic patterns.}
+	\subitem{\textbf{Content observation:} Data leaving from the user's end is encrypted so an adversary cannot view its contents, however data at the receivers end may not be encrypted. Tor does not filter content for identifying information and filtering tools such as Privoxy should be used to anonymize data streams.}
+	\subitem{\textbf{Configuration distinguishability:} Different Tor users can have different configurations for their OPs, for example switching circuits more often. Although this may optimize Tor for the users needs, it may lose anonymity by appearing more distinct than the rest of the users. This assists the adversary in profiling users.}
+	\subitem{\textbf{Time based co-relation attack:} An attacker that watches traffic patterns between clients and destination can confirm relationships with a high probability. Such co-relations are difficult to hide due to it being a low latency network. Possible defences are inserting dummy traffic, cloaking the connection between the OP and the first OR etc. This may restrict the capabilities of a local adversary, but is not a good defence against a global adversary.}
+	\subitem{\textbf{Message size based co-relation attack:} Packet counting at endpoints is an effective way of confirming relationships, however the leaky pipe topology allows packets entering one end of the circuit to exit via different ORs thus frustrating a an adversary using message based co-relation attacks.}
+	\subitem{\textbf{Website fingerprinting:} An adversary instead of searching exit connections for time or message based co-relation 	can build a database of 'fingerprints' based on the file sizes and access patterns of targeted websites. This database can latter be used to confirm user's connections at a later stage. Tor protects against this by having streams multiplexed within the same circuit and is limited to the granularity of cell sizes.}
 	
-	\item{Active Attacks}
+	\item[]{\textbf{Active Attacks}}
 	\subitem{Compromised keys}
 	\subitem{system intrusion, legal or extralegal coercion}
 	\subitem{malicious recepient}
