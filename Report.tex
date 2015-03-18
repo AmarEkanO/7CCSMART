@@ -26,7 +26,7 @@ People seek anonymity on the internet for various reasons. Whistle-blowers expos
 Although this gives us a convincing argument for the need of internet anonymity. There are still people who do not understand the implications of a de-anonymized internet. The most popular argument against anonymity is the nothing-to-hide retort. This is naive and does not highlight the larger issues at stake. Having nothing to hide does not necessarily justify the need for others to know \cite{thechronicle}. 
 The first casualties of a de-anonymized internet would be Privacy and Freedom of speech. By giving up our privacy we are allowing our governments to monitor our thoughts, actions and potentially every aspect of our lives. A not so benevolent government with such power can turn the dynamics of democracy. Voters would be held accountable for their actions instead of the government. This progression would eventually lead to a totalitarian state \cite{privateinternetaccess}. 
 
-This review is organized as follows: In section \ref{intro} we begin with an introduction on the need for internet anonymity and the people that benefit from it. Section \ref{background} gives a chronological summary of the development of privacy enabling technologies and an overview of the present day technologies. In Section \ref{taxonomy} we describe a model to classify anonymity by its properties, the type of network and adversity capabilities.Section \ref{design} takes a look at the design considerations of an anonymous network, understanding the threat model, typical attacks against the network and defensive countermeasures. 
+This review is organized as follows: In section \ref{intro} we begin with an introduction on the need for internet anonymity and the people that benefit from it. Section \ref{background} gives a chronological summary of the development of privacy enabling technologies and an overview of the present day technologies. In Section \ref{taxonomy} we describe a model to classify anonymity properties, adversary capabilities, network topology and metrics to measure anonymity. 
 In Section \ref{tor} we review Tor, its design goals, assumptions and architecture. Section \ref{tor_attack_defence} we study the attacks against the Tor network and its defences.
 
 Section \ref{comparison} does a comparative study of other popular anonymity networks with Tor. Section \ref{openissues} discusses the open issues with the Tor network and encourages the reader to take up some of these challenges. Finally we conclude in Section \ref{conclusion}
@@ -126,32 +126,6 @@ Kelly et al. \cite{kelly2012exploring} reviewed several probabilistic and determ
 	\item[]{\textbf{K-Anonymity:} In this model determines the level of anonymity by determining the minimum number of individuals or individual pairs that form part of the anonymity set. In the example of discussed previously a 3-anonymity is achieved since Eve believes that one of the three members sent a message to Alice.}
 	\item[]{\textbf{Individual Anonymity Degree:} In the Individual Anonymity Degree model, the adversary associates a probability of being exposed to each individual in the network. The adversary also sets a threshold value on the probability to determine if an individual is exposed. During the attack the adversary is constantly updating these values from the information learned from the network.}
 	\item[]{\textbf{Entropy Anonymity:} This model determines the level of uncertainty or randomness in a given anonymity set. The higher the entropy in the probability distribution among individuals the harder it is for an adversary to determine the identities or relationships between individuals.}
-\end{itemize}
-
-\section{Design considerations for an anonymity network} \label{design}
-\subsection{Understanding the threat model}
-\begin{itemize}
-	\item{Attacker capabilities}
-	\item{Attack methodology}
-	\item{Attackers goals: identifying or service blocking}
-\end{itemize}
-\subsection{Typical attack methods}
-\begin{itemize}
-	\item{Traffic analysis}
-	\item{Timing attacks}
-	\item{Watermark attack}
-	\item{Predecessor attack}
-	\item{Path selection attack}
-	\item{Congestion attack}
-	\item{Blocking attack}
-\end{itemize}
-\subsection{Anti-attack design considerations}
-\begin{itemize}
-	\item{Restricting Information Leaking}
-	\item{Node/Directory protection and hardening}
-	\item{Obfuscation/Diffusion}
-	\item{Eliminating connection characteristics}
-	\item{Error Detection and Fault tolerance}
 \end{itemize}
 
 \section{Overview of Tor} \label{tor}
@@ -260,6 +234,13 @@ Introduction points are vulnerable to DoS attacks and measures must be taken by 
 \end{itemize}
 
 \section{Conclusion} \label{conclusion}
+\begin{itemize}
+	\item{Restricting Information Leaking}
+	\item{Node/Directory protection and hardening}
+	\item{Obfuscation/Diffusion}
+	\item{Eliminating connection characteristics}
+	\item{Error Detection and Fault tolerance}
+\end{itemize}
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
