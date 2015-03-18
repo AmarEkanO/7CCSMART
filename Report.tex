@@ -15,7 +15,7 @@
 \maketitle
 
 \begin{abstract} 
-	The objective of this review is to educate the reader on Internet privacy and anonymity. This review is intended for people interested in researching privacy enhancing technologies and/or designing such systems. We begin with an overview of anonymity technologies and their design considerations. We follow it up with a detailed evaluation of the Tor network, attacks against it, how it defends itself against such attacks and how it compares with other existing low latency anonymity networks. We conclude with discussing some of the open issues with the Tor network in an effort to encourage the reader to take up some of the challenges. 
+	The objective of this review is to educate the reader on Internet privacy and anonymity. This review is intended for people interested in researching privacy enhancing technologies and/or designing such systems. We begin with an overview of anonymity technologies and their design considerations. We follow it up with a detailed evaluation of the Tor network, attacks against it, how it defends itself against such attacks. We then do a comparison with other existing low latency anonymity networks. We conclude with discussing some of the open issues with the Tor network in an effort to encourage the reader to take up some of the challenges. 
 \end{abstract}
 
 \section{Introduction} \label{intro}
@@ -175,22 +175,45 @@ Tor's design goals were that it must work with existing Internet infrastructure,
 Each node in the Tor network runs an Onion Router (OR). An OR maintains Transport Layer Security (TLS) session with other routers in the network. An OR can be run as a user-level process without any special privileges. Each user runs an Onion Proxy (OP) to query Directory Authorities, create circuits and handle connections from user applications. OPs accept TCP data and multiplex them across circuits. ORs at the end of the circuits connect to the intended recipients and relay the data.
 
 Every router in the network maintains two keys. One is a long term key used to sign TLS certificates, Router descriptors and collaborating directories. A router descriptor stores information about the router's keys, address, bandwidth, exit policy and so on. The long term key is known as the identity key. The other key is a short term key also called the onion key. The onion key is used to decrypt requests and to setup a circuit and exchange session keys. ORs communicate using the TLS protocol. To prevent key compromise attacks the onion keys are periodically rotated and independently.
-\\ \\
-\textbf{Cells}
-\\
+
+\subsubsection{Cells}
 Fixed sized messages called cells are used for OR-OR and OP-OR communication. Each cell is 512 bytes in size and consists of a header and a payload. The header contains a circuit identifier to specify which circuit the cell refers to and a command to for the recipient to decide what to do with the payload.
 Based on the command, cells are either control cells or relay cells. Control cells are always interpreted by the node that receives it. Relay cells carry stream data. Relay cells have an additional header to identify the stream, a checksum for integrity, length of the payload and a relay command. The contents of a relay cell are encrypted/decrypted using 128-bit AES cipher in counter mode to generate a cipher stream.
 
-\\ \\
-\textbf{Circuits and Streams}
-\\
+\subsubsection{Circuits and Streams}
 Circuits channel TCP streams within the Tor network. A circuit can be shared by multiple TCP streams. Since setting up a circuit is a time consuming process, users preemptively create circuits. To prevent linkability new circuits are periodically created and old used circuits are expired. Typically circuit rotation occurs once a minute. Circuit creation is initiated by the OP and is constructed by negotiating a symmetric key with each OR on the circuit one hop at a time. The OP sends the first OR on the path a create command cell. Using Diffie-Hellman handshake they negotiate a key K. Once the circuit has been established relay messages are exchanged using the key K. To extend the circuit the OP sends a relay extend cell specifying the address of the next OR along with sufficient information to start a Diffie-Hellman key exchange with the next OR. If the circuit is extended successfully then a the newly added OR responds with the second half of the Diffie-Hellman key exchange and thus the OP and the newly added OR negotiate a key K'. To extend the circuit further the OP has to tell the last node in the circuit to extend to the next specified OR and a similar key exchange protocol is observed.
-\\ \\
-Relay cells
+
+\subsubsection{Relay cells}
 When a OR receives a relay cell it decrypts the relay header and payload with the key negotiated for that circuit. The OR validates the message integrity by validating the digest. If valid it accepts and processes the relay, if the check fails an error has occurred and the circuit is torn down.
 To construct a relay cell the OP/OR adds a digest and then iteratively encrypts the payload with the keys negotiated for the circuit and forwards it to the next hop.
 To tear down a circuit the OP sends a destroy control cell. Like circuit creation, tear down is an incremental process. Each OR that receives the destroy cell, closes all streams on that circuit and passes a ne destroy cell to the next hop until the final hop is reached.
 Similarly the OP can truncate a circuit by sending relay truncate cell to a single OR. The OR then sends a destroy cell to the forward circuit and extends the circuit to different nodes, without the intermediate nodes being aware of this change. Similarly if a OR in the circuit goes offline, the adjacent OR will send a relay truncated cell back to the OP. 
+
+\subsubsection{Opening and Closing streams}
+If the user's application wants to connect to a certain address and port, it request the OP to make a connection. The OP chooses a circuit and an exit node on that circuit. The OP via SOCKS then opens a stream by sending a relay begin cell the exit node. Once the exit node connects to the remote host, it responds with a relay connected cell. Upon receipt the OP sends a SOCKS reply to notify the users application. Once the stream has been created, data from the user application is packaged into relay cells and sent along the circuit to the exit node.
+Some applications perform a DNS lookup of the hostname before sending it along the circuit. This reveals the destination of the host to the DNS server compromising sender anonymity. Thus applications should prefer having hostnames resolved by the Tor client instead of the users applications.
+A relay teardown cell is sent to the OR in case of an abnormal stream closure. In a normal stream closure a relay end cell is sent to the OR which replies with a relay end cell.
+
+\subsubsection{Stream integrity checking}
+Tor uses TLS to encrypt link communication to prevent external adversaries for modifying data. protecting against an internal adversary is a little more complex. Including hashes at each hop induces processing overhead and only verifies traffic from the OP to ORs. ORs cannot generate hashes for intermediate nodes since they don't know the session keys of other nodes. Moreover end-to-end timing attacks is a known issue with Tor, so tagging attacks reveal no additional data to the adversary.
+Thus Tor opts to check message integrity at the stream edge. When a new hop is added to the circuit a SHA-1 digest is derived from the negotiated session key. These digests are added to the contents of all relay cells created, and include the first four bytes of the current digest.
+
+\subsubsection{Rate limiting and fairness}
+Tor allows the volunteers running the network to limit their bandwidth usage. Tor uses a token bucket approach to maintain a long term average rate will allowing short term burst above the allowed bandwidth.
+
+\subsubsection{Congestion control}
+To prevent bottlenecks in the network, Tor performs congestion control at the circuit level and stream level. Every OR maintains a packaging window and a delivery window. The packaging windows tracks how many relay data cells the OR is willing to transmit back to the OP and the delivery window tracks how many relay data cells it is willing to deliver to TCP streams outside the network. These windows are initialized to certain values and decremented each time a data cell is packaged or delivered the corresponding window is decremented. If the packaging window reaches zero the OR stops reading data from its TCP streams on the corresponding circuit. A relay sendme cell is sent to the OP with the stream id set to zero. The packaging window is incremented whenever an OR receives a relay sendme cell with stream id set to zero.
+The OP keeps track of the packaging and delivery windows of each OR in the circuit. When the packaging windows reaches zero for an OR it stops reading from streams destined for that OR.
+
+Stream level congestion control works in a similar way as circuit level congestion control, with the difference being that the OR checks if data has been successfully flushed onto the TCP stream before sending out relay sendme cells. If the data to be flushed is below a threshold value typically ten cells, then a relay sendme cell is sent to the OP.
+
+\subsubsection{Rendezvous points and hidden services}
+Tor allows its users to provide location-hidden services such as webservers while preserving receiver anonymity. This is achieved by using rendezvous points. The hidden service design allows the users to control access to the service by filtering incomming requests, this prevents an adversary from flooding the service with requests. The service is not tied to a single OR but can be migrated across multiple ORs, this is done to prevent a OR failure from crippling the service. Smear-resistance to rendezvous routers prevents them from being framed for objectionable content being provided by the hidden service.
+The use of hidden services in Tor is as follows. The user generates a public key pair to identify the service. He then chooses several ORs to be introduction points to this service. He advertises these introduction points on a lookup service and signs them with the generated public key. The user then builds circuits to each of these introduction points and waits for requests.
+Clients use a lookup service to get details about the hidden service. The client then chooses a OR as its rendezvous point (RP) to setup up a connection with the hidden service. The client creates a circuit to the RP and gives it a randomly chosen 'rendezvous cookie' to recognize the hidden service. The client then opens an anonymous stream to one of the introduction points advertised on the lookup service and gives it a message encrypted with the service's public key, telling it about the client, the RP, the rendezvous cookie and the start of a Diffie Hellman handshake. The introduction point sends the message to the hidden service which then decides if it wants to talk to the client or not.
+If it decides to talk to the client, the hidden service builds a circuit to the clients RP and sends the rendezvous cookie, the second half of the Diffie Hellman cookie and a hash of the session key they now share. The RP now binds the clients circuit  to the circuit between the RP and the hidden service. The client can now start communicating by sending a relay begin cell along the circuit which is processed by the OP for the hidden service which then connects to the webserver. An anonymous stream has now been established for the clients to communicate with the service as if it were a normal webserver.
+
+Introduction points are vulnerable to DoS attacks and measures must be taken by the operators of the hidden service to mitigate them. Some approaches are to increase the number of introduction points, provide clients with a current list or predicted list of unadvertised introduction points, etc.
 
 \section{Attacks and Defenses} \label{tor_attack_defence}
 \begin{itemize}
