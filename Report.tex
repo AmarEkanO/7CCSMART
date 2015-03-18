@@ -226,17 +226,24 @@ Introduction points are vulnerable to DoS attacks and measures must be taken by 
 	\subitem{\textbf{Website fingerprinting:} An adversary instead of searching exit connections for time or message based co-relation 	can build a database of 'fingerprints' based on the file sizes and access patterns of targeted websites. This database can latter be used to confirm user's connections at a later stage. Tor protects against this by having streams multiplexed within the same circuit and is limited to the granularity of cell sizes.}
 	
 	\item[]{\textbf{Active Attacks}}
-	\subitem{Compromised keys}
-	\subitem{system intrusion, legal or extralegal coercion}
-	\subitem{malicious recepient}
-	\subitem{malicious onion proxy}
-	\subitem{DoS for traffic redirection}
-	\subitem{Watermarking attacks}
-	\subitem{Replay attacks, smear attacks}
-	\subitem{Protocol content tampering}
+	\subitem{\textbf{Compromised keys:} Compromising session keys will allow the attacker to decrypt control cells and a decrypt a layer of relay cells on every circuit on that connection. Learning the ORs private key allows him to impersonate the OR and must also learn the onion key to decrypt create cells for the keys lifetime. Periodic key rotation minimizes the risk of this attack. However if the attacker learns the ORs identity key then he can poison the directory servers with a forged descriptor thus granting full access to the node indefinitely.}
+	\subitem{\textbf{System intrusion, Legal or Extralegal coercion:} Compromising each OR along a circuit by such means will lead the adversary to the end node. However the adversary needs to complete this within the lifetime of the circuit for it the circuit is changed the necessary information will have been discarded. Additionally forward secrecy prevents the adversary from forcing the node to decrypt recorded traffic once the circuit has been closed.}
+	\subitem{\textbf{Malicious recepient:} An attacker running a malicious website can learn a users traffic patterns and can introduce arbitrary responses. This end to end attacks easier. Also the users application could leak identifying information to the rogue website further compromising anonymity.} 
+	\subitem{\textbf{Malicious onion proxy:} If an attacker compromises an onion proxy all future connections from it will be compromised. This could happen if user have to connect to an OP located at a remote site or if the attacker gets users to run a subverted OP on their systems. This attack has been addressed by signing all Tor releases with an official public key and providing a list of secure release version to Directory Servers.}
+	\subitem{\textbf{Traffic redirection:} Mounting a DoS attack against non-observable nodes can force traffic through adversary controlled nodes. The best defence against such an attack is robustness.}
+	\subitem{\textbf{Watermarking attacks:} Cells can be modified at a hostile node to aid in confirming co-relations. This attack is prevented by integrity checks on cells.}
+	\subitem{\textbf{Replay attacks:} Tor is resilient to replay attacks since replaying a handshake message negotiates a different session key each time so recorded messages cannot be reused.}
+	\subitem{\textbf{Smear attacksL:} A adversary could use Tor for illegal or socially unacceptable acts, in the hopes of bringing down the network from bad press. Exit policies reduce the possibility of this abuse.}
+	\subitem{\textbf{Unauthenticated protocols:} If unauthenticated protocols like HTTP are used, a rogue exit node could impersonate a target server and trick users into connecting to it. To prevent this attack users should prefer authenticated protocols such as HTTPS.}
 	\subitem{Network DoS}
-	\subitem{Directory Attacks}
-	\subitem{Rendezvous point attacks}
+	\item{\textbf{Attacks against Directory Servers}}
+	\subitem{\textbf{Destroying servers:} If a few servers go offline, the remaining servers in operation can generate a consensus directory and broadcast network information. However if more than half the servers are taken offline the clients will need human intervention whether to trust the resulting directory.}
+	\subitem{\textbf{Directory subversion:} If an adversary can subvert a directory server, he can influence the final directory. Subverting a majority of the directories allows the adversary to include compromised ORs into the final directory. To defend against this Directory Server operators need to be independent and attack-resistant.}
+	\subitem{\textbf{Listing hostile or malfunctioning ORs:} The Tor threat model assumes that directory operators can filter out malicious ORs from the final directory.}
+	\item{\textbf{Attacks against Rendezvous points}}
+	\subitem{\textbf{Flooding introduction points:} By flooding introduction points with requests an attacker could possibly deny access to a hidden service. To protect against this introduction points block requests that lack authorization tokens. Additionally the service operator can limit the amount of request he is willing to serve or require the requester to solve a computational problem for each request made.}
+	\subitem{\textbf{Disabling introduction points:} An attacker could disable the advertised introduction points to a hidden service and disrupt communication. Since the identity of a hidden service is attached to its public key and not to introduction points, the service can simply re-advertise itself at different introduction points.}
+	\subitem{\textbf{Subverting an introduction point:} An attacker could compromise an introduction point  and flood the hidden service with requests or drop all valid requests from reaching the service. To defend against this attack the hidden service should be able to detect a flood and close the circuit and periodically send the introduction point a rendezvous request and ensure that the request reaches the service.}  
 \end{itemize}
 
 \section{Comparing Tor with other anonymizing networks} \label{comparison}
