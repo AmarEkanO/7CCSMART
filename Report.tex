@@ -48,10 +48,9 @@ Mixmaster was certainly superior to its predecessors Type 0 and Type I remailers
 
 By 1997 remailers were well established as a privacy enabling technology. During that period researchers such as Ross Anderson and Adam Back were working on a platform that provided redundancy and resilience to censorship. Documents published via this platform could not be "unpublished". Anderson's proposed platform was called the Eternity Service \cite{anderson96eternity} which was later implemented by Back \cite{back:usenet}. Projects such as PipeNet\cite{pipenet10} and Onion Routing \cite{onion-routing:ih96} took the initiative to develop a platform for general internet anonymity. PipeNet was eventually shelved due to lack of interest and never made it past the design stages. Onion Routing on the other hand was a promising candidate to build low latency anonymous networks. Unlike PipeNet, Onion Routing leaned more towards performance and robustness. PipeNet preferred security over performance and would terminate its operation if its security was compromised in any way.
 
-With more people using the Internet there has been a steady rise in the research for Internet privacy and anonymity. The Crowds network developed by Michael Reiter and Aviel Rubin at AT\&T Labs was one of the pioneering works in anonymizing web traffic \cite{crowds:tissec}. The users of Crowd would be grouped into large and geographically diverse groups. These groups would then collectively issue requests on behalf of its members. The idea was that to an observer the request could have come from any member of the Crowd network and even the members of the network would not be able to differentiate if the request was from the originator or just another member passing the message around the network.
+With more people using the Internet there has been a steady rise in the research for Internet privacy and anonymity. The Crowds network developed by Michael Reiter and Aviel Rubin at AT\&T Labs was one of the pioneering works in anonymizing web traffic \cite{crowds:tissec}. The users of Crowd would be grouped into large and geographically diverse groups. These groups would then collectively issue requests on behalf of its members. The idea was that to an observer the request could have come from any member of the Crowd network and even the members of the network would not be able to differentiate if the request was from the originator or just another member passing the message around the network. MorphMix\cite{morphmix:wpes2002}, P2P (previously known as Tarzan)\cite{tarzan:ccs02}, Herbivore\cite{herbivore:tr} and P5\cite{sherwood-protocol} were other attempts to develop low latency distributed anonymous networks.
 
-In 2000 Zero-Knowledge Systems's Inc developed the Freedom Network \cite{freedom2-arch}, a PipeNet inspired project. Unlike Crowds, Freedom Network was intended to be a commercial venture and there were significant costs to running and maintaining nodes in the network. Freedom was a high quality anonymity network but due to its high cost of operation it received little user acceptance.
-
+In 2000 Zero-Knowledge Systems's Inc developed the Freedom Network \cite{freedom2-arch}, a PipeNet inspired low latency mix network. Unlike Crowds, Freedom Network was intended to be a commercial venture and there were significant costs to running and maintaining nodes in the network. Freedom was a high quality anonymity network but due to its high cost of operation it received little user acceptance.
 
 \subsection{Extant technologies in the 21st century}
 
@@ -129,7 +128,7 @@ Kelly et al. \cite{kelly2012exploring} reviewed several probabilistic and determ
 \end{itemize}
 
 \section{Overview of Tor} \label{tor}
-Tor is a distributed overlay network designed to anonymize TCP traffic. The original paper on the seminal work of Dingledine et al. \cite{tor-design} was published in 2004, since then there have been significant improvements to the system. In this section we discuss the salient features of Tor, its design and architecture and finally attacks and defences of the network. 
+Tor is a low latency mix network designed to anonymize TCP traffic. The original paper on the seminal work of Dingledine et al. \cite{tor-design} was published in 2004, since then there have been significant improvements to the system. In this section we discuss the salient features of Tor, its design and architecture and finally attacks and defences of the network. 
 \subsection{Features}
 Onion Routing uses a distributed network to anonymize TCP traffic. Tor clients build a path within this network composed of nodes called Onion Routers. This path is known as a circuit. Each router in the circuit has information about the next router in the circuit and the previous router. It has no information about other nodes in the network. Each link in the Tor network uses symmetric encryption and traffic is encrypted and marshalled into fixed size cells. 
 \begin{itemize}
@@ -221,7 +220,7 @@ Introduction points are vulnerable to DoS attacks and measures must be taken by 
 \end{itemize}
 
 \section{Comparing Tor with other anonymizing networks} \label{comparison}
-(Comparison with I2P and Freenet)
+In this section we compare Tor with other low latency networks.
 
 \section{Open issues with Tor} \label{openissues}
 \begin{itemize}
