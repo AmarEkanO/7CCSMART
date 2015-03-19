@@ -222,24 +222,21 @@ Introduction points are vulnerable to DoS attacks and measures must be taken by 
 \section{Comparing Tor with other anonymizing networks} \label{comparison}
 In this section we compare Tor with other low latency networks.
 
-\section{Open issues with Tor} \label{openissues}
-\begin{itemize}
-	\item{Scalibility}
-	\item{Bandwidth categorization}
-	\item{Node diversity}
-	\item{Traffic shaping/padding}
-	\item{Exit node caching}
-	\item{Directory distribution}
-\end{itemize}
+\section{Open issues and Future work} \label{openissues}
+In this section we discuss some of the existing issues with Tor and future work that needs to be done to improve the network. Design goals that were not part of the original Tor design such as decentralised peer-to-peer structure, protocol normalization and protection against end to end attacks may have to be factored in as the network grows. Denial of Service attacks such as CPU resource consumption or taking ORs offline have yet to find acceptable solutions. Exit policy abuse is one of the most serious challenges faced by Tor. Adversaries could implicate exit nodes of being complicit in malicious and threaten volunteers with legal action. Tor's configurable exit policy helps mitigate this to a certain extent. For example SMTP is blocked by default at Tor exit nodes. Till date no Tor operator has been convicted and in some cases the EFF provides legal help in responding to cease and desist notices.
+
+Dingledine et al. \cite{tor-design} suggested a few areas where further research and development is required for the Tor network. At the top of their list is Scalability. The current semi-centralized structure would not scale past a few hundred nodes and a more elegant approach would be required to distribute network state information to clients. Nodes in the network are assumed to have decent bandwidth and latency, instead they suggest that nodes should advertise their bandwidth capacity to avoid congestion issues. Adding cover traffic to frustrate end to end attacks is another topic of debate. Weighing the security benefits to cost of performance is research area that needs to be looked at.
+At the heart of the Tor network are its volunteers, the greater the diversity of the network the higher the level of anonymity offered to its users. Apart from proving routing services, there is also a need for additional scrutiny of the specification for security vulnerabilities. 
 
 \section{Conclusion} \label{conclusion}
-\begin{itemize}
-	\item{Restricting Information Leaking}
-	\item{Node/Directory protection and hardening}
-	\item{Obfuscation/Diffusion}
-	\item{Eliminating connection characteristics}
-	\item{Error Detection and Fault tolerance}
-\end{itemize}
+
+%\begin{itemize}
+%	\item{Restricting Information Leaking}
+%	\item{Node/Directory protection and hardening}
+%	\item{Obfuscation/Diffusion}
+%	\item{Eliminating connection characteristics}
+%	\item{Error Detection and Fault tolerance}
+%\end{itemize}
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
