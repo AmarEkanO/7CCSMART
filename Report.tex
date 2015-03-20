@@ -71,20 +71,20 @@ Using free software, Tor has enabled roughly 36 million people around the world 
 Before we can begin a discussion about Tor,  we need a way to describe anonymity networks in general. Kelly et al. proposed a Cubic Taxonomy to describe anonymity properties, adversity capabilities and network topology \cite{kelly2012exploring}. This section is a summary of their work on Cubic Taxonomy and gives us an understanding of the underlying properties of anonymity networks.
 
 \subsection{Anonymity properties}
-Anonymity properties can be broadly classified as unidentifiability, unlinkibality and unobservability. Unidentifiability means that an adversary is unable to distinguish an individual or a groups identity from a set of individuals or groups. Unlinkability means an adversary is unable to form relations between individuals, messages, activities or information of interest by observing the system. Additionally the adversary's priori and posteriori knowledge of the system remain unchanged. Unobservability means that an adversary is unable to observe messages or other information as opposed to identities of individuals or relations between them.
+The fundamental properties of anonymity are unidentifiability, unlinkibality and unobservability.\\
 
-Udentifiability is composed of four properties. Sender Anonymity, Receiver Anonymity, Mutual Anonymity and Group Anonymity. The definitions of these properties is as follows.
+Unidentifiability is composed of four properties: 
 \begin{itemize}
-\item[]{\textbf{Sender Anonymity:} Is achieved when a particular message cannot be identified with a specific sender.}
-\item[]{\textbf{Receiver Anonymity:} Is achieved when a particular message cannot be identified with a specific receiver.}
-\item[]{\textbf{Mutual Anonymity:} This not only achieves Sender and Receiver Anonymity, but also ensures that the sender cannot identify the recipient and the recipient cannot identify the sender.}
+\item[]{\textbf{Sender Anonymity:} Is preserved when a particular message cannot be identified with a specific sender.}
+\item[]{\textbf{Receiver Anonymity:} Is preserved when a particular message cannot be identified with a specific receiver.}
+\item[]{\textbf{Mutual Anonymity:} This not only preserves Sender and Receiver Anonymity, but also ensures that the sender cannot identify the recipient and the recipient cannot identify the sender.}
 \item[]{\textbf{Group Anonymity:} Is the same as Sender/Receiver Anonymity but when applied in the context of a group instead of individuals.}
 \end{itemize}
 
-Unlinkability is composed of three properties. Location Anonymity, Communication Anonymity and Group Communication Anonymity. Each of which are defined as follows.
+Unlinkability is composed of three properties:
 \begin{itemize}
-	\item[]{\textbf{Location Anonymity:} Is achieved when a particular message is not linked to an individuals location or movement.}
-	\item[]{\textbf{Communication Anonymity:} Is achieved when a particular message cannot be linked to any sender receiver pair and no message is linkable to a particular sender receiver pair.}
+	\item[]{\textbf{Location Anonymity:} Is preserved when a particular message is not linked to an individuals location or movement.}
+	\item[]{\textbf{Communication Anonymity:} Is preserved when communication between sender receiver pairs stays undetected.}
 	\item[]{\textbf{Group Communication Anonymity}: Is the same as Communication Anonymity but in the context of sender and receiver groups instead of individuals.}
 \end{itemize}
 
@@ -94,15 +94,15 @@ The classical definition of Unidentifiability is composed of Sender and Receiver
 An adversary is defined as an agent or a group of agents with an aim to degrade or eliminate anonymity. Understanding adversity capabilities helps us in developing a threat model for an anonymity network. Adversity capabilities are categorized as Reachability, Attackability and Adaptability.
 
 \begin{itemize}
-	\item[]{\textbf{Reachability:} An adversity's reachability is either local or global. A global adversary has access to all the nodes and links in the network. A local adversary has access to only a portion of the network's nodes and links. The adversary reachability defines the extent of his knowledge of the system.}
+	\item[]{\textbf{Reachability:} An adversity's reach is either local or global. A global adversary has access to all the nodes and links in the network whereas a local adversary has access to only a portion of the network's nodes and links. The adversary reachability defines the extent of his knowledge of the system.}
 	\item[]{\textbf{Adaptability:} An anonymous network can be either static or dynamic. In a static network the adversary's knowledge of the system and its targets remains constant during and after an attack. A dynamic network could prevent an adversary launching a successful attack but at the same time it could be leaking information to the adversary. In a static network the adversary's priori knowledge remains constant, but in a dynamic network the posterior knowledge could potentially increase.}
-	\item[]{\textbf{Attackability:} An adversary can be passive or active in nature and internal or external to the network being attacked. A passive/external adversary is part of the surrounding of the anonymous network and is capable of compromising links. An active/internal adversary is part of the anonymous network and is capable of participating in the communication and may also control some of the nodes in the network.}
+	\item[]{\textbf{Attackability:} An adversary can be passive or active in nature and internal or external to the network being attacked. A passive adversary typically observes and analyses the network. Passive attacks do not disrupt or modify the network communication in any way. An active adversary can mount attacks to disrupt or modify communication within the network.}
 \end{itemize}
 
 \subsection{ Network topology}
 The Cubic Taxonomy \cite{kelly2012exploring} classifies anonymity networks as wired, wireless or a hybrid. These networks have schemes for  path selection, communication medium, topology and protocol implementations. These factors affect adversary capabilities and anonymity properties of a network. A brief summary of network categorization and its composition is given below.
 
-Wired networks are composed of Path topology, Route scheme and Path type. It is assumed that the adversary has knowledge of these parameters during the attack. 
+Wired can be classified based on Path topology, Route scheme and Path type. It is assumed that the adversary has knowledge of these parameters during the attack. 
 \begin{itemize}
 	\item[]{\textbf{Path topology:} Topology routing are of two types, free/distributed or cascaded. In free/distributed routing the sender selects a path of variable length within the network to transfer messages. Free routing relies on the network infrastructure or participants to route messages anonymously. In cascade routing the sender can choose from a set of fixed paths to transfer messages.}
 	\item[]{\textbf{Route Scheme:} Routing schemes within the network can be either Unicast like Tor or Multicast/Broadcast like in DC-nets. }
@@ -112,7 +112,7 @@ Wired networks are composed of Path topology, Route scheme and Path type. It is 
 Wireless networks are classified as Topology based or Position based. A Topology based network uses its link information to perform routing operations. Position based networks uses its nodes geolocation to perform routing operations. Each of these routing strategies use a proactive approach, reactive approach or a combination of both. In a proactive protocol, the nodes periodically exchange control information among themselves to make routing decisions and learn about network changes. A reactive protocol use an on-demand approach to generating routes. When users want to communicate the network sends out probes to create a route for communication. A hybrid protocol is a combination of both a proactive and reactive protocols.
 
 \subsection{Mesauring Anonymity}
-Consider a network with four members. Alice and Bob are members of this network and Bob wants to send Alice a message anonymously. If an adversary Eve believes that the message received by Bob was from one of the other three members in the network, then sender anonymity is preserved. If Eve determines that Alice did receive the message then receiver anonymity is eliminated. Knowing that Alice was the recipient degrades communication anonymity since Eve can reduce the number of sender-receiver relationships. She can now eliminate the two other members of the network as recipients of the message.
+Consider a network with four members. Alice and Bob are members of this network and Bob wants to send Alice a message anonymously. If an adversary Eve believes that the message received by Bob was from one of the other three members in the network, then Sender Anonymity is preserved. However Receiver Anonymity is not preserved if Eve determines that Alice received the message.  Knowing that Alice was the recipient degrades communication anonymity since Eve can reduce the number of sender-receiver relationships. She can now eliminate the two other members of the network as recipients of the message.
 
 Kelly et al. \cite{kelly2012exploring} reviewed several probabilistic and deterministic methods of measuring anonymity. This allows us to determine the level or change in anonymity of individual identities or the relationships between when under attack. Some of them are summarized below. 
 \begin{itemize}
