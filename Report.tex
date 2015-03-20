@@ -123,7 +123,7 @@ Kelly et al. \cite{kelly2012exploring} reviewed several probabilistic and determ
 \end{itemize}
 
 \section{Overview of Tor} \label{tor}
-Tor is a semi-distributed low latency mix network designed to anonymize TCP traffic. Dingledine et al. \cite{tor-design} describe the salient features of Tor, its design and architecture and finally attacks and defences of the network. This section summarises their work.
+Tor is a semi-distributed low latency mix network designed to anonymize TCP traffic. Dingledine et al. \cite{tor-design} describe the salient features of Tor, its design and architecture and attacks and defences of the network. This section summarises their work.
 \subsection{Features}
 The Tor network consists of nodes known as Onion Routers (OR). To communicate, clients randomly choose ORs to generate a path between the user and its intended destination. These paths are known as circuits. The node that connect the client to the network is knows as a Guard node and the node relaying traffic to outside the network is an Exit node. Each node in the circuit is aware of the next node and the previous node in the circuit and are oblivious to other nodes in the network. Messages are exchanged within the network in the form of cells. A cells relay control commands or data within the network and are 512 bytes long. Before the cell enters the circuit, it is encrypted with the session keys exchanged by between client and node. As it flows along the circuit each layer of encryption is decrypted and passed to the next node. This process of multiple encryptions at the client and decryptions at nodes is known as Onion Routing. 
 \begin{itemize}
@@ -184,7 +184,7 @@ If it decides to talk to the client, the hidden service builds a circuit to the 
 
 Introduction points are vulnerable to DoS attacks and measures must be taken by the operators of the hidden service to mitigate them. Some approaches are to increase the number of introduction points, provide clients with a current list or predicted list of unadvertised introduction points, etc.
 
-\section{Attacks and Defenses} \label{tor_attack_defence}
+\section{Attacks and Defences} \label{tor_attack_defence}
 \begin{itemize}
 	\item[]{\textbf{Passive Attacks}}
 	\subitem{\textbf{Traffic observation:} Although an adversary cannot detect the users destination. It can observe traffic patterns of data sent and received. Although further processing may be required, users can be profiled based on their traffic patterns.}
